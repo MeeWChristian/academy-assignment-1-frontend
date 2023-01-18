@@ -79,7 +79,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ togglePasswordButtonType = 'icon'
       <form className="sm:w-[400px] w-3/4" onSubmit={handleLogin}>
         <IonText className="text-primary-brand text-xl font-extrabold">{t('authentication.login')}</IonText>
         <IonItem lines="none" color={'white-background'} class="border border-grey-text mt-8">
-          <IonInput value={email} placeholder={t('authentication.email')} onIonChange={(e) => setEmail(e.detail.value ?? '')} type="email" required class="h-[59px] items-center" />
+          <IonInput
+            value={email}
+            placeholder={t('authentication.email')}
+            onIonChange={(e) => setEmail(e.detail.value ?? '')}
+            type="email"
+            required
+            class="h-[59px] items-center"
+          />
           <IonIcon icon={at} size="medium" className="text-primary-brand" />
         </IonItem>
 
