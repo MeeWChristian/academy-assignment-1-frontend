@@ -88,28 +88,28 @@ export default HomePage;
 
 const pages = [
   {
-    name: 'photo',
+    //name: 'photo',
     icon: cameraOutline,
     path: '/tab1',
     component: Tab1,
     redirect: true,
   },
   {
-    name: 'people',
+    //name: 'people',
     icon: peopleOutline,
     path: '/tab2',
     component: Tab2,
     redirect: false,
   },
   {
-    name: 'ticket',
+    //name: 'ticket',
     icon: ticketOutline,
     path: '/tab3',
     component: Tab3,
     redirect: false,
   },
   {
-    name: 'wallet',
+    //name: 'wallet',
     icon: walletOutline,
     path: '/tab4',
     component: Tab4,
@@ -117,4 +117,4 @@ const pages = [
   },
 ];
 
-const menuItems = [{ name: 'Settings' }, { name: 'Account' }, { name: 'Questionnaire' }, { name: 'Logout' }];
+//const menuItems = [{ name: 'Settings' }, { name: 'Account' }, { name: 'Questionnaire' }, { name: 'Logout' }];

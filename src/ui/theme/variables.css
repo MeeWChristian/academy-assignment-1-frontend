@@ -1,9 +1,9 @@
 /** Edit this as your general style guide! (Typography is in global.css) */
 :root {
-  --primary-color: #202124;
+  --primary-color: #000000;
   --primary-color-rgb: rgb(32, 33, 36);
   --primary-shade: #151517;
-  --primary-tint: #34363c;
+  --primary-tint: #a855f7;
 
   --secondary-color: #202124;
   --secondary-color-rgb: rgb(32, 33, 36);

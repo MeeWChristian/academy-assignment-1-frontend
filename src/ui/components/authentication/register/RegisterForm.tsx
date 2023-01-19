@@ -47,18 +47,18 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
   const handleSignUp = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (password !== repeatedPassword) {
-      return await presentAlert({ header: t('authentication.signUpFailed'), message: t('authentication.passwordMustMatch'), buttons: ['OK'] });
+      return await presentAlert({ header: t('authentication.signupFailed'), message: t('authentication.passwordMustMatch'), buttons: ['OK'] });
     }
     await present({ message: t('authentication.creatingUser') });
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (data.user) {
       setAuthUser(data.user);
       await dismiss();
-      await presentAlert({ header: t('authentication.signUpSuccessful'), buttons: ['OK'] });
+      await presentAlert({ header: t('authentication.signupSuccessful'), buttons: ['OK'] });
       router.push('/intro');
     } else {
       await dismiss();
-      await presentAlert({ header: t('authentication.signUpFailed'), message: error?.message, buttons: ['OK'] });
+      await presentAlert({ header: t('authentication.signupFailed'), message: error?.message, buttons: ['OK'] });
     }
   };
 
@@ -113,10 +113,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
   return (
     <div className="flex h-full justify-center items-center w-full">
       <form className="sm:w-[400px] w-3/4 relative" onSubmit={handleSignUp}>
-        <div className="flex items-center">
-          <IonIcon onClick={() => history.goBack()} icon={chevronBackCircle} size={'large'} color={'primary-brand'} className="pr-2 cursor-pointer" />
-          <IonText className="text-primary-brand text-xl font-extrabold">{t('authentication.signUp')}</IonText>
-        </div>
+        <IonText className="text-primary-brand text-xl font-extrabold">{t('authentication.signup')}</IonText>
         <IonItem lines="none" color={'white-background'} className={`border ${emailValid ? 'border-grey-text' : 'border-red-300'} mt-8`}>
           <IonInput
             value={email}
@@ -160,9 +157,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
         </IonItem>
 
         <IonText className={`text-red-500 ${repPasswordValid && 'opacity-0'}`}>{t('authentication.passwordMustMatch')}</IonText>
-
         <IonButton expand="full" className="w-full mb-2" onClick={handleSignUp} disabled={isDisabled}>
-          {t('authentication.signUp')}
+          {t('authentication.signup')}
         </IonButton>
         <button className="hidden" type="submit" />
 
@@ -172,6 +168,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
           <SocialLoginButton provider="facebook" onClick={() => signUpWithThirdParty('facebook')} />
           <SocialLoginButton provider="google" onClick={() => signUpWithThirdParty('google')} />
           <SocialLoginButton provider="apple" onClick={() => signUpWithThirdParty('apple')} />
+        </div>
+        <div className="mt-10">
+          <IonText className="text-primary-brand text-xl">{t('authentication.alreadyHasAccount')} <IonText className='cursor-pointer font-semibold' onClick={() => router.push('/login')}>{t('authentication.loginLink')}</IonText></IonText>
         </div>
       </form>
     </div>

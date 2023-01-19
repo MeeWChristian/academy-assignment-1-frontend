@@ -1,11 +1,15 @@
 {
   "landingPage": {
-    "title": "Welcome to MeeWs frontend template",
-    "signIn": "Sign in"
+    "welcomeTo": "Welcome to",
+    "brand": "AMAze",
+    "introduction": "The social Q&A platform!\nAsk questions and get answers.",
+    "login": "Login",
+    "signup": "Sign up",
+    "whatIs": "What is"
   },
   "authentication": {
     "login": "Login",
-    "signUp": "Sign up",
+    "signup": "Sign up",
     "signOut": "Sign out",
     "email": "Email",
     "password": "Password",
@@ -32,6 +36,10 @@
     "sendingEmail": "Sending email...",
     "resetLinkSent": "Reset link sent",
     "ifAccountExists": "If an account exists, a password reset link has been sent.",
-    "sendResetLink": "Send reset link"
+    "sendResetLink": "Send reset link",
+    "noAccountQuestion": "Don't have an account?",
+    "registerLink": "Register here",
+    "alreadyHasAccount": "Already have an account?",
+    "loginLink": "Login here"
   }
 }
