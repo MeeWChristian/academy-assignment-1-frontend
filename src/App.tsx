@@ -44,6 +44,7 @@ import ForgotPasswordPage from 'ui/pages/ForgotPasswordPage';
 import ResetPasswordPage from 'ui/pages/ResetPasswordPage';
 import HomePage from 'ui/pages/HomePage';
 import { AntdThemeWrapper } from './ui/theme/AntdThemeWrapper';
+import UserProfile from 'ui/pages/UserProfile';
 
 setupIonicReact({ mode: 'ios' });
 
@@ -78,6 +79,7 @@ const App: React.FC = () => {
             <Route exact path="/register" component={RegisterPage} />
             {/*<Route exact path="/intro" component={IntroPage} />*/}
             <Route path="/ui-library" component={UILibRouter} />
+            <Route path="/user/:user" component={UserProfile} />
             <Route path="/*">
               <Redirect to={session ? '/home' : '/welcome'} />
             </Route>

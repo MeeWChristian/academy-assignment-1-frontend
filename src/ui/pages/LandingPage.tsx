@@ -21,7 +21,7 @@ const LandingPage: React.FC = () => {
         <section className='w-full relative'>
           <div className='absolute w-full h-full animate-bg-scroll bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 bg-[length:400%_400%] brightness-[0.5]'></div>
           <Center>
-            <div className='relative h-full w-full backdrop-brightness-[2] max-w-2xl  drop-shadow-lg m-20 p-4'>
+            <div className='relative h-full w-full backdrop-brightness-[2] max-w-2xl drop-shadow-lg m-20 p-4'>
               <p className='text-center bold text-3xl sm:text-5xl md:text-7xl'>{t('landingPage.welcomeTo')}<br /><span className='font-extrabold text-transparent text-6xl sm:text-8xl md:text-9xl bg-clip-text bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500' style={{ filter: 'drop-shadow(3px 3px 1px black)' }}>{t('landingPage.brand')}</span></p>
               <p className='text-center text-md sm:text-2xl md:text-4xl'>{t('landingPage.introduction')}</p>
               <div className='flex justify-center my-4'>

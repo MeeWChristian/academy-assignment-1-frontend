@@ -53,6 +53,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (data.user) {
       setAuthUser(data.user);
+      await supabase.from('users').insert([{ uuid: data.user.id, username: null, first_name: null, last_name: null, avatar: null }]);
       await dismiss();
       await presentAlert({ header: t('authentication.signupSuccessful'), buttons: ['OK'] });
       router.push('/intro');

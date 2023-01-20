@@ -58,8 +58,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ togglePasswordButtonType = 'icon'
     await dismiss();
   };
 
-  //const handleSignUp = () => router.push('/register');
-
   const handleForgottenPassword = () => router.push('/forgotpassword');
 
   const makeToggleRevealButton = () => {

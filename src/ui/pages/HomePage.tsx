@@ -19,9 +19,9 @@ import {
   IonButton,
   useIonRouter,
 } from '@ionic/react';
-import { peopleOutline, ticketOutline, walletOutline, cameraOutline } from 'ionicons/icons';
+import { peopleOutline, ticketOutline, walletOutline, cameraOutline, homeOutline } from 'ionicons/icons';
 
-import Tab1 from './tabs/tab-1/Tab1';
+import Feed from './tabs/feed/Feed';
 import Tab2 from './tabs/tab-2/Tab2';
 import Tab3 from './tabs/tab-3/Tab3';
 import Tab4 from './tabs/tab-4/Tab4';
@@ -42,6 +42,10 @@ const HomePage: React.FC = () => {
     await supabase.auth.signOut();
     router.push('/login');
   };
+
+
+  console.log(pages);
+  console.log(pages.filter((p) => p.redirect)[0].path);
 
   return (
     <IonPage id="main-content">
@@ -89,9 +93,9 @@ export default HomePage;
 const pages = [
   {
     //name: 'photo',
-    icon: cameraOutline,
-    path: '/tab1',
-    component: Tab1,
+    icon: homeOutline,
+    path: '/feed',
+    component: Feed,
     redirect: true,
   },
   {
