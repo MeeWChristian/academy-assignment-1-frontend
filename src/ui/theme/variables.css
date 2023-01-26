@@ -18,3 +18,7 @@
 
   --background: var(--primary-color);
 }
+
+.tab-selected {
+  color: var(--primary-tint);
+}

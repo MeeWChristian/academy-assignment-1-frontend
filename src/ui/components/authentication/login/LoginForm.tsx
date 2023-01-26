@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { IonButton, IonIcon, IonInput, IonItem, IonText, useIonRouter, useIonLoading, useIonAlert } from '@ionic/react';
-import { at, eyeOffOutline, eyeOutline, lockClosedOutline } from 'ionicons/icons';
+import { IonButton, IonIcon, IonInput, IonItem, IonText, useIonRouter, useIonLoading, useIonAlert, useIonToast } from '@ionic/react';
+import { at, eyeOffOutline, eyeOutline, lockClosedOutline, personAdd } from 'ionicons/icons';
 import { useAuthUserStore } from 'store/user';
 import { supabase } from 'apis/supabaseClient';
 import SocialLoginButton from '../social-login-buttons/SocialLoginButton';
@@ -21,6 +21,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ togglePasswordButtonType = 'icon'
   const router = useIonRouter();
   const [present, dismiss] = useIonLoading();
   const [presentAlert] = useIonAlert();
+  const toast = useIonToast();
 
   const setAuthUser = useAuthUserStore((state) => state.setAuthUser);
 

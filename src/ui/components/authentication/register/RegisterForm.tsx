@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { IonButton, IonIcon, IonInput, IonItem, IonText, useIonRouter, useIonLoading, useIonAlert } from '@ionic/react';
 import { supabase } from 'apis/supabaseClient';
-import { at, chevronBackCircle, eyeOffOutline, eyeOutline, lockClosedOutline } from 'ionicons/icons';
+import { at, chevronBackCircle, eyeOffOutline, eyeOutline, lockClosedOutline, personOutline } from 'ionicons/icons';
 import SocialLoginButton from '../social-login-buttons/SocialLoginButton';
 import Separator from 'ui/components/generic/Separator';
 import { useAuthUserStore } from 'store/user';
@@ -19,6 +19,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
   const setAuthUser = useAuthUserStore((state) => state.setAuthUser);
 
   const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [repeatedPassword, setRepeatedPassword] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
@@ -27,6 +28,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
   const [present, dismiss] = useIonLoading();
   const [presentAlert] = useIonAlert();
   const [emailValid, setEmailValid] = useState<boolean>(true);
+  const [usernameValid, setUsernameValid] = useState<boolean>(true);
   const [passwordValid, setPasswordValid] = useState<boolean>(true);
   const [repPasswordValid, setRepPasswordValid] = useState<boolean>(true);
 
@@ -34,14 +36,16 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
     const emailRegex =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const emailCheck = emailRegex.test(email) && email !== '';
+    const usernameCheck = username.length >= 3 && username !== '';
     const passwordCheck = password.length >= 8 && password !== '';
     const repPasswordCheck = password === repeatedPassword && repeatedPassword !== '';
 
     setEmailValid(emailCheck || email === '');
+    setUsernameValid(usernameCheck || username === '');
     setPasswordValid(passwordCheck || password === '');
     setRepPasswordValid(repPasswordCheck || repeatedPassword === '');
 
-    setIsDisabled(!emailCheck || !passwordCheck || !repPasswordCheck);
+    setIsDisabled(!emailCheck || !usernameCheck || !passwordCheck || !repPasswordCheck);
   }, [email, password, repeatedPassword]);
 
   const handleSignUp = async (e: { preventDefault: () => void }) => {
@@ -53,7 +57,14 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (data.user) {
       setAuthUser(data.user);
-      await supabase.from('users').insert([{ uuid: data.user.id, username: null, first_name: null, last_name: null, avatar: null }]);
+      await supabase
+        .from('profile')
+        .insert(
+          {
+            id: data.user.id, 
+            username: username,
+          }
+        );
       await dismiss();
       await presentAlert({ header: t('authentication.signupSuccessful'), buttons: ['OK'] });
       router.push('/intro');
@@ -128,6 +139,21 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
         </IonItem>
 
         <IonText className={`text-red-500 ${emailValid && 'opacity-0'}`}>{t('authentication.emailInvalid')}</IonText>
+
+        <IonItem lines="none" color={'white-background'} className={`border ${usernameValid ? 'border-grey-text' : 'border-red-300'}`}>
+          <IonInput
+            value={username}
+            placeholder={t('authentication.username')}
+            onIonChange={(e) => setUsername(e.detail.value ?? '')}
+            type="text"
+            required
+            class="h-[59px] items-center"
+          />
+          <IonIcon icon={personOutline} size="medium" className="text-primary-brand" />
+        </IonItem>
+
+        <IonText className={`text-red-500 ${usernameValid && 'opacity-0'}`}>{t('authentication.usernameMinLength')}</IonText>
+
 
         <IonItem lines="none" color={'white-background'} className={`border ${passwordValid ? 'border-grey-text' : 'border-red-300'}`}>
           <IonInput

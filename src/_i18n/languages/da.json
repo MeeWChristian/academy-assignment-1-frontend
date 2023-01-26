@@ -1,0 +1,108 @@
+{
+  "generic": {
+    "brand": "AMAze",
+    "goBack": "Tilbage",
+    "changedLanguage": "Skiftet sprog til Dansk"
+  },
+  "landingPage": {
+    "welcomeTo": "Velkommen til",
+    "introduction": "Den Sociale Spørgsmål-Og-Svar platform!\nStil spørgsmål og få svar.",
+    "login": "Login",
+    "signup": "Register",
+    "whatIs": "Hvad er",
+    "howDoesItWork": "Hvordan virker det?"
+  },
+  "authentication": {
+    "login": "Login",
+    "signup": "Register",
+    "signOut": "Log ud",
+    "email": "Email",
+    "username": "Brugernavn",
+    "password": "Kodeord",
+    "repeatPassword": "Gentag kodeord",
+    "required": "Dette felt er påkrævet",
+    "passwordMustMatch": "Kodeordene skal være ens",
+    "genericError": "Der skete en fejl",
+    "signingIn": "Logger ind...",
+    "loginFailed": "Login fejlede",
+    "signUpFailed": "Registering fejlede",
+    "redirecting": "Navigerer...",
+    "show": "Vis",
+    "hide": "Skjul",
+    "forgotPassword": "Glemt kodeord?",
+    "or": "Eller",
+    "creatingUser": "Laver bruger...",
+    "signupSuccessful": "Registering vellykket!",
+    "emailInvalid": "Email er ugyldig",
+    "passwordMinLength": "Skal være mindst 8 tegn",
+    "passwordResetFailed": "Kodeordsnulstilling fejlet",
+    "resetting": "Nulstiller...",
+    "resetSuccessful": "Nulstilling vellykket!",
+    "resetPassword": "Nulstil kodeord",
+    "sendingEmail": "Sender email...",
+    "resetLinkSent": "Nulstillingslink sendt",
+    "ifAccountExists": "Hvis en konto eksisterer, er en kodeords nulstillingslink sendt.",
+    "sendResetLink": "Send nulstillingslink",
+    "noAccountQuestion": "Har du ikke en konto?",
+    "registerLink": "Registrer her",
+    "alreadyHasAccount": "Har du allerede en konto?",
+    "loginLink": "Login her",
+    "usernameMinLength": "Brugernavn skal være mindst 3 tegn"
+  },
+  "homePage": {
+    "logOut": "Log ud"
+  },
+  "feed": {
+    
+  },
+  "users": {
+    "users": "Brugere"
+  },
+  "questions": {
+    "yourQuestions": "Dine spørgsmål",
+    "noQuestionsYet": "Du har ingen spørgsmål at svare på.\nMåske skulle du prøve at stille en anden et spørgsmål?",
+    "seeUsers": "Se brugere",
+    "askedBy": "Spurgt af",
+    "typeYourAnswer": "Indtast dit svar her...",
+    "answer": "Svar",
+    "asked": "Spurgt",
+    "answerSubmitted": "Svar Indsendt!",
+    "disquardedQuestion": "Spørgsmål kasseret..."
+  },
+  "userProfile": {
+    "editProfile": "Rediger profil",
+    "answers": "Svar",
+    "questions": "Spørgsmål",
+    "askQuestion": "Stil et spørgsmål",
+    "askedBy": "Spurgt af",
+    "answered": "Svaret",
+    "noAnswersYet": "Ingen spørgsmål svaret, endnu!"
+  },
+  "editProfile": {
+    "UUID": "UUID",
+    "email": "Email",
+    "username": "Brugernavn",
+    "firstName": "Fornavn",
+    "lastName": "Efternavn",
+    "avatarURL": "Profilbillede URL",
+    "updateInfo": "Opdater Info",
+    "updatedSuccessfully": "Opdatering Vellykket!"
+  },
+  "askPage": {
+    "askAQuestion": "Stil et spørgsmål!",
+    "youAreAsking" : "Du spørger",
+    "enterQuestionHere": "Indtast spørgsmål her...",
+    "askAnonymously": "Spørg anonymt",
+    "ask": "Spørg",
+    "successfullyAskedQuestion": "Spørgsmål Indsendt!"
+  },
+  "edgeFunction": {
+    "runEdgeFunction": "Kør Edge Function",
+    "edgeFunctionExample": "Edge Function Eksempel",
+    "enterName": "Indtast dit navn",
+    "name": "Navn",
+    "submit": "Indsend",
+    "responseFromEdgeFunction": "Svar fra Edge Function",
+    "ok": "OK"
+  }
+}
