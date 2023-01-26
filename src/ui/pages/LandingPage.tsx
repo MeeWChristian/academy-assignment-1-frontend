@@ -1,25 +1,59 @@
 import React from 'react';
-import { IonButton, IonContent, IonImg, IonPage, useIonRouter } from '@ionic/react';
-import img from 'static/assets/img/meew-bg.jpg';
+import { IonButton, IonContent, IonIcon, IonImg, IonPage, IonText, IonTitle, useIonRouter } from '@ionic/react';
+import { Center } from 'ui/components/generic/Center';
 
-/**
- * Notice that the img will "underlap" under the content, to keep its proportion.
- * This is the desired behavior, because it allows for any amount of content and takes the space from the bottom of the img.
- */
+import { t } from 'i18next';
+import { arrowDown } from 'ionicons/icons';
+import { BGGradient } from 'ui/components/generic/BGGradient';
+
 const LandingPage: React.FC = () => {
   const router = useIonRouter();
+
+  const scrollTo = (ele: string) => {
+    const element = document.getElementById(ele);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <IonPage>
       <IonContent fullscreen>
-        <IonImg src={img} class="fixed w-full h-auto" />
-        <div className="fixed w-full bg-white bottom-0 p-5">
-          <h3>Velkommen til MeeW Apps!</h3>
-          <p className="pb-4">Din app-udviklings template til alle behov dine app-udviklings behov!</p>
+        <section className='w-full relative'>
+          <BGGradient absolute={true} />
+          <Center>
+            <div className='relative h-full w-full backdrop-brightness-[2] max-w-2xl drop-shadow-lg m-20 p-4'>
+              <p className='text-center bold text-3xl sm:text-5xl md:text-7xl'>{t('landingPage.welcomeTo')}<br /><span className='font-extrabold text-transparent text-6xl sm:text-8xl md:text-9xl bg-clip-text bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500' style={{ filter: 'drop-shadow(3px 3px 1px black)' }}>{t('generic.brand')}</span></p>
+              <p className='text-center text-md sm:text-2xl md:text-4xl'>{t('landingPage.introduction')}</p>
+              <div className='flex justify-center my-4'>
+                <IonButton onClick={() => router.push('/login')} expand='full' className='w-64'>{t('landingPage.login')}</IonButton>
+                <IonButton onClick={() => router.push('/register')} expand='full' className='w-64'>{t('landingPage.signup')}</IonButton>
+              </div>
+              <div className='flex justify-center'><IonIcon icon={arrowDown} className='text-2xl sm:text-5xl cursor-pointer animate-arrow-bounce hover:text-gray-300' onClick={() => scrollTo('about')} /></div>
+            </div>
+          </Center>
+        </section>
+        <section className='bg-black flex justify-center px-10'>
 
-          <IonButton onClick={() => router.push('/login')} expand="full" className="h-[50px]">
-            Kom i gang
-          </IonButton>
-        </div>
+          <div className='max-w-2xl' id='about'>
+            <div className='py-10'>
+              <p className='text-white text-center text-5xl sm:text-6xl'>{t('landingPage.whatIs')} <span className='font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500' style={{ filter: 'drop-shadow(3px 3px 1px black)' }}>{t('generic.brand')}</span>?</p>
+              <p className='text-white text-center max-w-3xl text-lg sm:text-xl mt-3 sm:mt-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo tempora at itaque adipisci sequi et exercitationem rerum! Cum, quia? Reiciendis beatae quo cum vitae repellat numquam nihil minus sit?</p>
+            </div>
+            <div className='py-10'>
+              <p className='text-white text-center text-5xl sm:text-6xl'>{t('landingPage.howDoesItWork')}</p>
+              <p className='text-white text-center max-w-3xl text-lg sm:text-xl mt-3 sm:mt-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo tempora at itaque adipisci sequi et exercitationem rerum! Cum, quia? Reiciendis beatae quo cum vitae repellat numquam nihil minus sit?</p>
+            </div>
+            <div className='py-10'>
+              <p className='text-white text-center text-5xl sm:text-6xl'>Lorem</p>
+              <p className='text-white text-center max-w-3xl text-lg sm:text-xl mt-3 sm:mt-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo tempora at itaque adipisci sequi et exercitationem rerum! Cum, quia? Reiciendis beatae quo cum vitae repellat numquam nihil minus sit?</p>
+            </div>
+            <div className='py-10'>
+              <p className='text-white text-center text-5xl sm:text-6xl'>Ipsum</p>
+              <p className='text-white text-center max-w-3xl text-lg sm:text-xl mt-3 sm:mt-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat nemo tempora at itaque adipisci sequi et exercitationem rerum! Cum, quia? Reiciendis beatae quo cum vitae repellat numquam nihil minus sit?</p>
+            </div>
+          </div>
+        </section>
       </IonContent>
     </IonPage>
   );

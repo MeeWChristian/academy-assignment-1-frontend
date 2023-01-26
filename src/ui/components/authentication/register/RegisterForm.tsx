@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { IonButton, IonIcon, IonInput, IonItem, IonText, useIonRouter, useIonLoading, useIonAlert } from '@ionic/react';
 import { supabase } from 'apis/supabaseClient';
-import { at, chevronBackCircle, eyeOffOutline, eyeOutline, lockClosedOutline } from 'ionicons/icons';
+import { at, chevronBackCircle, eyeOffOutline, eyeOutline, lockClosedOutline, personOutline } from 'ionicons/icons';
 import SocialLoginButton from '../social-login-buttons/SocialLoginButton';
 import Separator from 'ui/components/generic/Separator';
 import { useAuthUserStore } from 'store/user';
@@ -19,6 +19,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
   const setAuthUser = useAuthUserStore((state) => state.setAuthUser);
 
   const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [repeatedPassword, setRepeatedPassword] = useState<string>('');
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
@@ -27,6 +28,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
   const [present, dismiss] = useIonLoading();
   const [presentAlert] = useIonAlert();
   const [emailValid, setEmailValid] = useState<boolean>(true);
+  const [usernameValid, setUsernameValid] = useState<boolean>(true);
   const [passwordValid, setPasswordValid] = useState<boolean>(true);
   const [repPasswordValid, setRepPasswordValid] = useState<boolean>(true);
 
@@ -34,31 +36,41 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
     const emailRegex =
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const emailCheck = emailRegex.test(email) && email !== '';
+    const usernameCheck = username.length >= 3 && username !== '';
     const passwordCheck = password.length >= 8 && password !== '';
     const repPasswordCheck = password === repeatedPassword && repeatedPassword !== '';
 
     setEmailValid(emailCheck || email === '');
+    setUsernameValid(usernameCheck || username === '');
     setPasswordValid(passwordCheck || password === '');
     setRepPasswordValid(repPasswordCheck || repeatedPassword === '');
 
-    setIsDisabled(!emailCheck || !passwordCheck || !repPasswordCheck);
+    setIsDisabled(!emailCheck || !usernameCheck || !passwordCheck || !repPasswordCheck);
   }, [email, password, repeatedPassword]);
 
   const handleSignUp = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (password !== repeatedPassword) {
-      return await presentAlert({ header: t('authentication.signUpFailed'), message: t('authentication.passwordMustMatch'), buttons: ['OK'] });
+      return await presentAlert({ header: t('authentication.signupFailed'), message: t('authentication.passwordMustMatch'), buttons: ['OK'] });
     }
     await present({ message: t('authentication.creatingUser') });
     const { data, error } = await supabase.auth.signUp({ email, password });
     if (data.user) {
       setAuthUser(data.user);
+      await supabase
+        .from('profile')
+        .insert(
+          {
+            id: data.user.id, 
+            username: username,
+          }
+        );
       await dismiss();
-      await presentAlert({ header: t('authentication.signUpSuccessful'), buttons: ['OK'] });
+      await presentAlert({ header: t('authentication.signupSuccessful'), buttons: ['OK'] });
       router.push('/intro');
     } else {
       await dismiss();
-      await presentAlert({ header: t('authentication.signUpFailed'), message: error?.message, buttons: ['OK'] });
+      await presentAlert({ header: t('authentication.signupFailed'), message: error?.message, buttons: ['OK'] });
     }
   };
 
@@ -113,10 +125,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
   return (
     <div className="flex h-full justify-center items-center w-full">
       <form className="sm:w-[400px] w-3/4 relative" onSubmit={handleSignUp}>
-        <div className="flex items-center">
-          <IonIcon onClick={() => history.goBack()} icon={chevronBackCircle} size={'large'} color={'primary-brand'} className="pr-2 cursor-pointer" />
-          <IonText className="text-primary-brand text-xl font-extrabold">{t('authentication.signUp')}</IonText>
-        </div>
+        <IonText className="text-primary-brand text-xl font-extrabold">{t('authentication.signup')}</IonText>
         <IonItem lines="none" color={'white-background'} className={`border ${emailValid ? 'border-grey-text' : 'border-red-300'} mt-8`}>
           <IonInput
             value={email}
@@ -130,6 +139,21 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
         </IonItem>
 
         <IonText className={`text-red-500 ${emailValid && 'opacity-0'}`}>{t('authentication.emailInvalid')}</IonText>
+
+        <IonItem lines="none" color={'white-background'} className={`border ${usernameValid ? 'border-grey-text' : 'border-red-300'}`}>
+          <IonInput
+            value={username}
+            placeholder={t('authentication.username')}
+            onIonChange={(e) => setUsername(e.detail.value ?? '')}
+            type="text"
+            required
+            class="h-[59px] items-center"
+          />
+          <IonIcon icon={personOutline} size="medium" className="text-primary-brand" />
+        </IonItem>
+
+        <IonText className={`text-red-500 ${usernameValid && 'opacity-0'}`}>{t('authentication.usernameMinLength')}</IonText>
+
 
         <IonItem lines="none" color={'white-background'} className={`border ${passwordValid ? 'border-grey-text' : 'border-red-300'}`}>
           <IonInput
@@ -160,9 +184,8 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
         </IonItem>
 
         <IonText className={`text-red-500 ${repPasswordValid && 'opacity-0'}`}>{t('authentication.passwordMustMatch')}</IonText>
-
         <IonButton expand="full" className="w-full mb-2" onClick={handleSignUp} disabled={isDisabled}>
-          {t('authentication.signUp')}
+          {t('authentication.signup')}
         </IonButton>
         <button className="hidden" type="submit" />
 
@@ -172,6 +195,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ togglePasswordButtonType = 
           <SocialLoginButton provider="facebook" onClick={() => signUpWithThirdParty('facebook')} />
           <SocialLoginButton provider="google" onClick={() => signUpWithThirdParty('google')} />
           <SocialLoginButton provider="apple" onClick={() => signUpWithThirdParty('apple')} />
+        </div>
+        <div className="mt-10">
+          <IonText className="text-primary-brand text-xl">{t('authentication.alreadyHasAccount')} <IonText className='cursor-pointer font-semibold' onClick={() => router.push('/login')}>{t('authentication.loginLink')}</IonText></IonText>
         </div>
       </form>
     </div>

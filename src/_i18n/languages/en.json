@@ -1,13 +1,23 @@
 {
+  "generic": {
+    "brand": "AMAze",
+    "goBack": "Go back",
+    "changedLanguage": "Changed language to English"
+  },
   "landingPage": {
-    "title": "Welcome to MeeWs frontend template",
-    "signIn": "Sign in"
+    "welcomeTo": "Welcome to",
+    "introduction": "The social Q&A platform!\nAsk questions and get answers.",
+    "login": "Login",
+    "signup": "Sign up",
+    "whatIs": "What is",
+    "howDoesItWork": "How does it work?"
   },
   "authentication": {
     "login": "Login",
-    "signUp": "Sign up",
+    "signup": "Sign up",
     "signOut": "Sign out",
     "email": "Email",
+    "username": "Username",
     "password": "Password",
     "repeatPassword": "Repeat password",
     "required": "This field is required",
@@ -22,7 +32,7 @@
     "forgotPassword": "Forgot password?",
     "or": "Or",
     "creatingUser": "Creating user...",
-    "signUpSuccessful": "Sign up successful!",
+    "signupSuccessful": "Sign up successful!",
     "emailInvalid": "Email invalid",
     "passwordMinLength": "Must be at least 8 characters",
     "passwordResetFailed": "Password reset failed",
@@ -32,6 +42,67 @@
     "sendingEmail": "Sending email...",
     "resetLinkSent": "Reset link sent",
     "ifAccountExists": "If an account exists, a password reset link has been sent.",
-    "sendResetLink": "Send reset link"
+    "sendResetLink": "Send reset link",
+    "noAccountQuestion": "Don't have an account?",
+    "registerLink": "Register here",
+    "alreadyHasAccount": "Already have an account?",
+    "loginLink": "Login here",
+    "usernameMinLength": "Username must be at least 3 characters"
+  },
+  "homePage": {
+    "logOut": "Log out"
+  },
+  "feed": {
+    
+  },
+  "users": {
+    "users": "Users"
+  },
+  "questions": {
+    "yourQuestions": "Your questions",
+    "noQuestionsYet": "You currently don't have any questions to answer.\nMaybe you should try asking somebody else a question?",
+    "seeUsers": "See users",
+    "askedBy": "Asked by",
+    "typeYourAnswer": "Type your answer here...",
+    "answer": "Answer",
+    "asked": "Asked",
+    "answerSubmitted": "Answer Submitted!",
+    "disquardedQuestion": "Discarded Question..."
+  },
+  "userProfile": {
+    "editProfile": "Edit profile",
+    "answers": "Answers",
+    "questions": "Questions",
+    "askQuestion": "Ask question",
+    "askedBy": "Asked by",
+    "answered": "Answered",
+    "noAnswersYet": "No questions answered, yet!"
+  },
+  "editProfile": {
+    "UUID": "UUID",
+    "email": "Email",
+    "username": "Username",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "avatarURL": "Avatar URL",
+    "updateInfo": "Update Info",
+    "updatedSuccessfully": "Updated Successfully!"
+  },
+  "askPage": {
+    "askAQuestion": "Ask a question!",
+    "youAreAsking" : "You are asking",
+    "enterQuestionHere": "Enter question here...",
+    "askAnonymously": "Ask anonymously",
+    "ask": "Ask",
+    "successfullyAskedQuestion": "Successfully Asked Question!"
+  },
+  "edgeFunction": {
+    "runEdgeFunction": "Run Edge Function",
+    "edgeFunctionExample": "Edge Function Example",
+    "enterName": "Enter your name",
+    "name": "Name",
+    "submit": "Submit",
+    "responseFromEdgeFunction": "Response from Edge Function",
+    "ok": "OK"
   }
 }

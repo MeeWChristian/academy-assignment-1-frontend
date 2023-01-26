@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { IonButton, IonIcon, IonInput, IonItem, IonText, useIonRouter, useIonLoading, useIonAlert } from '@ionic/react';
-import { at, eyeOffOutline, eyeOutline, lockClosedOutline } from 'ionicons/icons';
+import { IonButton, IonIcon, IonInput, IonItem, IonText, useIonRouter, useIonLoading, useIonAlert, useIonToast } from '@ionic/react';
+import { at, eyeOffOutline, eyeOutline, lockClosedOutline, personAdd } from 'ionicons/icons';
 import { useAuthUserStore } from 'store/user';
 import { supabase } from 'apis/supabaseClient';
 import SocialLoginButton from '../social-login-buttons/SocialLoginButton';
@@ -21,6 +21,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ togglePasswordButtonType = 'icon'
   const router = useIonRouter();
   const [present, dismiss] = useIonLoading();
   const [presentAlert] = useIonAlert();
+  const toast = useIonToast();
 
   const setAuthUser = useAuthUserStore((state) => state.setAuthUser);
 
@@ -57,8 +58,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ togglePasswordButtonType = 'icon'
     if (error) return await presentAlert({ header: t('authentication.genericError'), message: error?.message, buttons: ['OK'] });
     await dismiss();
   };
-
-  const handleSignUp = () => router.push('/register');
 
   const handleForgottenPassword = () => router.push('/forgotpassword');
 
@@ -102,12 +101,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ togglePasswordButtonType = 'icon'
           {password !== '' && makeToggleRevealButton()}
           {password === '' && togglePasswordButtonType !== 'none' && <IonIcon icon={lockClosedOutline} size="medium" className="text-primary-brand" />}
         </IonItem>
-        <div className="grid grid-cols-2 gap-5 mt-5">
+        <div className="mt-5">
           <IonButton expand="full" className="w-full" onClick={handleLogin} disabled={isSubmitDisabled}>
             {t('authentication.login')}
-          </IonButton>
-          <IonButton expand="full" className="w-full" onClick={handleSignUp}>
-            {t('authentication.signUp')}
           </IonButton>
           <button className="hidden" type="submit" />
         </div>
@@ -124,6 +120,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ togglePasswordButtonType = 'icon'
           <SocialLoginButton provider="facebook" onClick={() => signInWithThirdParty('facebook')} />
           <SocialLoginButton provider="google" onClick={() => signInWithThirdParty('google')} />
           <SocialLoginButton provider="apple" onClick={() => signInWithThirdParty('apple')} />
+        </div>
+
+        <div className="mt-10">
+          <IonText className="text-primary-brand text-xl">{t('authentication.noAccountQuestion')} <IonText className='cursor-pointer font-semibold' onClick={() => router.push('/register')}>{t('authentication.registerLink')}</IonText></IonText>
         </div>
       </form>
     </div>
